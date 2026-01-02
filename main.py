@@ -17,7 +17,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- GESTORE CONNESSIONI (Il "Postino") ---
 class ConnectionManager:
     def __init__(self):
         self.active_connections: List[WebSocket] = []
