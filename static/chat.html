@@ -34,12 +34,34 @@
     <script>
         const btn = document.getElementById('sendBtn');
         const input = document.getElementById('messageInput');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+
+        const protocollo = window.location.protocol === 'https:' ? 'wss' : 'ws';
+        const wsUrl = `${protocollo}://${window.location.host}/ws`;
+        
+        const socket = new WebSocket(wsUrl);
+
+        socket.onopen = function() {
+            statusDot.classList.remove('bg-slate-400');
+            statusDot.classList.add('bg-emerald-500', 'animate-pulse');
+            statusText.innerText = "Connesso";
+            statusText.classList.add('text-emerald-600');
+        };
+
+        socket.onclose = function() {
+            statusDot.classList.remove('bg-emerald-500', 'animate-pulse');
+            statusDot.classList.add('bg-red-500');
+            statusText.innerText = "Disconnesso";
+            statusText.classList.remove('text-emerald-600');
+            statusText.classList.add('text-red-600');
+        };
 
         function inviaMessaggio() {
             const testo = input.value.trim();
             if(!testo) return;
 
-            alert("Messaggio pronto per l'invio: " + testo);
+            socket.send(testo);
             
             input.value = "";
         }
