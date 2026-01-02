@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Invia Domanda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="bg-white w-full max-w-md p-6 rounded-2xl shadow-xl flex flex-col gap-4">
+        
+        <div class="text-center mb-2">
+            <h1 class="text-2xl font-black text-slate-800">Fai la tua domanda</h1>
+            <p class="text-slate-400 text-sm">Apparirà sul maxischermo in tempo reale</p>
+        </div>
+
+        <div id="statusBadge" class="self-center flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-full">
+            <span class="w-2 h-2 bg-slate-400 rounded-full" id="statusDot"></span>
+            <span class="text-xs font-bold text-slate-500" id="statusText">Disconnesso</span>
+        </div>
+
+        <textarea id="messageInput" rows="3" 
+                  placeholder="Scrivi qui..." 
+                  class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 text-lg focus:outline-none focus:border-emerald-500 focus:bg-white transition-all resize-none"></textarea>
+
+        <button id="sendBtn" onclick="inviaMessaggio()" 
+                class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-black text-lg py-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-all">
+            INVIA 🚀
+        </button>
+
+    </div>
+
+    <script>
+        const btn = document.getElementById('sendBtn');
+        const input = document.getElementById('messageInput');
+
+        function inviaMessaggio() {
+            const testo = input.value.trim();
+            if(!testo) return;
+
+            alert("Messaggio pronto per l'invio: " + testo);
+            
+            input.value = "";
+        }
+    </script>
+
+</body>
+</html>
